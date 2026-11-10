@@ -20,7 +20,22 @@
     `ternopil.api`, `ternopil.referer`.
 - `yasnoRegions`: `{"odesa": {"region": 7, "dso": 701}}` — регіон, який YASNO почав покривати, або нові id.
 - `dtekAjaxMethod`: поле `method` форми будинків ДТЕК (зараз `getHomeNum`).
-- Файлу немає — все увімкнено. Зіпсований файл (зокрема адреса не `https://`) ігнорується, лишається попередній.
+- `fixes`: знайти-замінити в сирій відповіді сайту до того, як застосунок її розбирає. Для дрібних змін на сайті:
+  перейменована змінна JS, ключ JSON, клас у HTML, код клітинки.
+  ```json
+  "fixes": [
+    { "source": "dtek", "find": "Schedule2\\.", "replace": "DisconSchedule." },
+    { "source": "yasno", "find": "\"type\":\\s*\"Off\"", "replace": "\"type\":\"Definite\"" },
+    { "source": "mykolaiv", "in": "request", "find": "addr/filii$", "replace": "address/branches" }
+  ]
+  ```
+  - `source`: назва регіону, `yasno` або `dtek` (усі сайти ДТЕК).
+  - `in`: `response` (типово) — відповідь сайту; `request` — адреса й тіло запиту (не для ДТЕК).
+  - `find` — regex (`NSRegularExpression`), `replace` — заміна, `$1` — перша група. Правки йдуть по черзі.
+  - Шукати треба в тексті, як його віддає сайт: у JSON кирилиця може бути як `А`.
+- `dtekPageMarker`: текст, за яким застосунок бачить, що сторінка ДТЕК завантажилась (типово `DisconSchedule.fact`).
+  Якщо ДТЕК перейменував змінну — тут нова назва, а в `fixes` правка, що повертає стару.
+- Файлу немає — все увімкнено. Зіпсований файл (адреса не `https://`, поганий regex) ігнорується, лишається попередній.
 - Зміна доходить за кілька хвилин (кеш GitHub ~5 хв) з наступним оновленням у застосунку.
 
 Регіони: `kyiv`, `kyivOblast`, `dnipro`, `odesa`, `donetsk` (ДТЕК), `mykolaiv`, `poltava`, `zhytomyr`,
