@@ -12,7 +12,15 @@
 
 - `off`: джерела, яких не питати. Назва регіону — сайт його компанії; `yasno` — YASNO.
 - `notices`: рядок на головному екрані й на екрані адреси. Без `regions` (або `[]`) — для всіх; `en` необов'язковий.
-- Файлу немає — все увімкнено. Зіпсований файл ігнорується, лишається попередній.
+- `urls`: нова адреса джерела, якщо воно переїхало. Не вказане лишається вбудованим. Лише `https://`.
+  - `dtek.kyiv`, `dtek.kyivOblast`, `dtek.dnipro`, `dtek.odesa`, `dtek.donetsk`: корінь сайту ДТЕК, наприклад
+    `https://www.dtek-kem.com.ua/ua/` (сторінка — `shutdowns`, форма — `ajax` під ним).
+  - `yasno`: `https://app.yasno.ua/api/blackout-service/public/shutdowns/`.
+  - `mykolaiv`, `poltava`, `zhytomyr`, `chernivtsi`, `lviv.power`, `lviv.site`, `lviv.referer`,
+    `ternopil.api`, `ternopil.referer`.
+- `yasnoRegions`: `{"odesa": {"region": 7, "dso": 701}}` — регіон, який YASNO почав покривати, або нові id.
+- `dtekAjaxMethod`: поле `method` форми будинків ДТЕК (зараз `getHomeNum`).
+- Файлу немає — все увімкнено. Зіпсований файл (зокрема адреса не `https://`) ігнорується, лишається попередній.
 - Зміна доходить за кілька хвилин (кеш GitHub ~5 хв) з наступним оновленням у застосунку.
 
 Регіони: `kyiv`, `kyivOblast`, `dnipro`, `odesa`, `donetsk` (ДТЕК), `mykolaiv`, `poltava`, `zhytomyr`,
