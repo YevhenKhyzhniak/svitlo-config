@@ -1,4 +1,10 @@
 {
   "off": [],
-  "notices": []
+  "notices": [
+    {
+      "uk": "Житомиробленерго: графіки погодинних відключень зараз не діють, на Житомирщині аварійні знеструмлення",
+      "en": "Zhytomyroblenergo: hourly schedules are not in effect now, emergency outages in Zhytomyr region",
+      "regions": ["zhytomyr"]
+    }
+  ]
 }
